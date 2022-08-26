@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}My hotel{% endblock %}
+
+{% block body %}
+ {% block titre %} <h3> My Hotel</h3>{% endblock %}
+
+{% for chambre in chambres %}
+ <h2 class="fst-italic text-danger ">
+    {{chambre.titre}}
+    </h2>
+   <div class="text-center">
+  {% if chambre.photo %}
+    <img src="{{chambre.photo}}">
+  {% else %}
+    <img src="{{ asset('images/default.jpg') }}" class="img-fluid w-25" alt="Chambre">
+  {% endif %}
+
+   <h3>{{chambre.prix}}$</h3>
+  
+    <div class="fst-italic color:  #6f42c1">
+      <h3>{{chambre.descriptionCourte}}</h3>
+      <a class="btn btn-warning col-12 mt-3" href="{{ path("chambre",{"id": chambre.id})}}">Voir la fiche</a>
+   </div>
+     </div>
+{% endfor %}
+
+{% endblock %}

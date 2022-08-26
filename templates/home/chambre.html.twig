@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ chambre.titre|capitalize}}{% endblock %}
+
+{% block h1 %}{{ chambre.titre|capitalize}}{% endblock %}
+
+{% block body %}
+<div class="text-center">
+<div>
+
+      {% if chambre.photo %}
+    <img src="{{chambre.photo}}">
+  {% else %}
+    <img src="{{ asset('images/default.jpg') }}" class="img-fluid w-10" alt="Chambre">
+  {% endif %}
+  </div>
+<h3>{{ chambre.prix}}$</h3>
+<h3>{{ chambre.descriptionCourte}}</h3>
+<h3>{{ chambre.descriptionLongue}}</h3>
+
+  </div>
+  
+  <hr>
+    {% if app.user %}
+        {{ form_start(form)}}
+            {{ form_row(form.startAt)}}
+            {{ form_row(form.endAt)}}
+            <input type="submit" value="Réserver" class="btn btn-success col-12 mt-3">
+        {{ form_end(form)}}
+    {% else %}
+        <h4>Veuillez vous connecter ou vous inscrire pour réserver cette chambre</h4>
+    {% endif %}
+{% endblock %}

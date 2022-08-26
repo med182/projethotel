@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} | Mon profil{% endblock %}
+
+{% block h1 %}Mon profil{% endblock %}
+
+{% block body %}
+
+<ul class="list-group col-md-6 mx-auto">
+  <li class="list-group-item">Email : {{ app.user.email }}</li>
+  <li class="list-group-item">Nom : {{ app.user.nom|upper }}</li>
+  <li class="list-group-item">Prénom : {{ app.user.prenom|capitalize }}</li>
+  <li class="list-group-item">Date d'inscription : {{ app.user.createdAt|date('l d F Y à h:i:s a') }}</li>
+
+{% if is_granted('ROLE_ADMIN') %}
+<li class="list-group-item">
+Role :
+{% for role in app.user.roles %}
+  {% if role == "ROLE_USER" %}Utilisateurs{% elseif role == "ROLE_ADMIN" %}Administration {% endif %} 
+
+  
+{% endfor %}
+</li>
+
+{% endif %}
+
+</ul>
+<div class=" row col-md-6 mx-auto mt-3">
+    <div class=" col-md-12 px-0">
+         <a class="btn btn-secondary col-md-12" href="{{path('profil_modification')}}">Modifier mon profil</a>
+</div>
+<div class=" col-md-12 mt-2 px-0">
+         <a class="btn btn-secondary col-md-12" href="{{path('password_modification')}}">Modifier mon mot de passe</a>
+</div>
+</div>
+
+
+{% endblock %}
